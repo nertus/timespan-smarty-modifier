@@ -44,14 +44,17 @@ class TimeUnitRU extends AbstractTimeUnit
     public function getUnitString()
     {
         $cases = array(5, 1, 2, 2, 2, 5);
-        $howMany = ($this->_unitCount % 100 > 4 && $this->_unitCount % 100 < 20) ? 5 : $cases[min($this->_unitCount % 10, 5)];
+        if($this->_unitCount > 1)
+            $howMany = ($this->_unitCount % 100 > 4 && $this->_unitCount % 100 < 20) ? 5 : $cases[min($this->_unitCount % 10, 5)];
+        else
+            $howMany = $this->_unitCount;
 
         return $this->_units[$howMany][$this->_unitType];
     }
 
     public function getPrefix()
     {
-        return 'примерно';
+        return 'около';
     }
 
     public function getHalf()
